@@ -43,6 +43,10 @@ Para iniciar o servidor da API como desenvolvimento utilizando nodemon, execute 
 
 A API estará disponível em http://localhost:{PORT} OU [http://localhost:5001](http://localhost:5001)
 
+## Utils
+
+O projeto possui uma pasta chamada utils que contem a collection de todos os endpoints para ser usada no Postman
+
 ## Rotas da API
 
 ### Products
