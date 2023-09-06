@@ -3,7 +3,7 @@ API de produtos
 
 ## Pré-requisitos
 
-- [Node.js](https://nodejs.org/) (versão X.X.X)
+- [Node.js](https://nodejs.org/) (versão 20.5.1)
 - [Git](https://git-scm.com/)
 
 ## Instalação
