@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "4934fd46-0f38-478c-993c-48de2903eb4a",
+		"name": "API Produtos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20001445"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"Teste\",\r\n    \"email\":\"teste@email.com\",\r\n    \"password\": \"123456\",\r\n    \"confirmPassword\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"lipe.dev@outlook.com.br\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCurrentUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZjcyY2JmZmZmMDIxYjEzYTI2NjVmZSIsImlhdCI6MTY5MzkyMDg4MiwiZXhwIjoxNjk0NTI1NjgyfQ.FfpryYbCIpZfGCOzndQbpTC32OycI6ZeagUpS222P0A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/user/profile",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZjcyY2JmZmZmMDIxYjEzYTI2NjVmZSIsImlhdCI6MTY5MzkyMDg4MiwiZXhwIjoxNjk0NTI1NjgyfQ.FfpryYbCIpZfGCOzndQbpTC32OycI6ZeagUpS222P0A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"Felipe Lemos\"\r\n    //\"password\":\"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/user/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserByID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OWVmZDc0YTA2M2FjZTYxOGM0MTE1NyIsImlhdCI6MTY4ODE0Njg3MCwiZXhwIjoxNjg4NzUxNjcwfQ.LVNyuV72LU6scn4B6z-0KdMP3kx2FCHr_IggOXEA5ag",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/user/64f72cbffff021b13a2665fe",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"user",
+								"64f72cbffff021b13a2665fe"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "GetProducts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZjcyY2JmZmZmMDIxYjEzYTI2NjVmZSIsImlhdCI6MTY5MzkyMDg4MiwiZXhwIjoxNjk0NTI1NjgyfQ.FfpryYbCIpZfGCOzndQbpTC32OycI6ZeagUpS222P0A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/product",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InsertProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZjczNjlkM2QwZDRjMzU5MGY2NDViYSIsImlhdCI6MTY5MzkyMjk3MywiZXhwIjoxNjk0NTI3NzczfQ.IogrzHFgkC1UaaAQ0A_QGcEKMkIkvslCfuarKe1sux4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"leite\",\r\n    \"descricao\": \"leite integral UHT\",\r\n    \"preco\":\"3,99\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/product",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZjczNjlkM2QwZDRjMzU5MGY2NDViYSIsImlhdCI6MTY5MzkyMjk3MywiZXhwIjoxNjk0NTI3NzczfQ.IogrzHFgkC1UaaAQ0A_QGcEKMkIkvslCfuarKe1sux4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"preco\": \"7,87\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/product/64f737093d0d4c3590f645c2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product",
+								"64f737093d0d4c3590f645c2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZjczNjlkM2QwZDRjMzU5MGY2NDViYSIsImlhdCI6MTY5MzkyMjk3MywiZXhwIjoxNjk0NTI3NzczfQ.IogrzHFgkC1UaaAQ0A_QGcEKMkIkvslCfuarKe1sux4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "649efd74a063ace618c41157",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/product/64f737093d0d4c3590f645c2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product",
+								"64f737093d0d4c3590f645c2"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "649efd74a063ace618c41157",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZjczNjlkM2QwZDRjMzU5MGY2NDViYSIsImlhdCI6MTY5MzkyMjk3MywiZXhwIjoxNjk0NTI3NzczfQ.IogrzHFgkC1UaaAQ0A_QGcEKMkIkvslCfuarKe1sux4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/product/64f737093d0d4c3590f645c2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"product",
+								"64f737093d0d4c3590f645c2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TestAPI",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/utils/health",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"utils",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YWMzZDg5ZjI4YjAyMDAzNzBlM2NhYyIsImlhdCI6MTY4OTAyMDcyMywiZXhwIjoxNjg5NjI1NTIzfQ.GiOrbP1o0oGKjXd2i54j8eo8j-4pSkUgzM7oG7ohos4",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:7001",
+			"type": "string"
+		}
+	]
+}
