@@ -21,7 +21,7 @@ API de produtos
    ```bash
    npm install
    ```
-4. Configure as variáveis de ambiente necessárias, como chaves de API ou informações de banco de dados, criando um arquivo `.env` no diretório raiz do projeto.
+4. Configure as variáveis de ambiente necessárias, como chaves de API ou informações de banco de dados, criando um arquivo `.env` no diretório raiz do projeto, se preferir pode renomear o arquivo de exemplo.
    ```bash
    PORT=5002
    MONGO_PASS=passuol  
