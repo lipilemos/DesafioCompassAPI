@@ -1,0 +1,9 @@
+# Node.js
+node_modules/
+npm-debug.log
+
+# Arquivos de compilação nativa
+build/
+dist/
+*.suo
+*.user

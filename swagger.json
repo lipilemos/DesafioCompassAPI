@@ -1,0 +1,756 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Produtos",
+        "description": "Documentação da API de Produtos",
+        "version": "1.0.0"
+    },
+    "tags": [
+        {
+            "name": "Products",
+            "description": "Endpoints relacionados a produtos"
+        },
+        {
+            "name": "Auth",
+            "description": "Endpoints relacionados a usuarios e autenticação"
+        },
+        {
+            "name": "Utils",
+            "description": "Retorna a saude da API"
+        },
+        {
+            "name":"Joker",
+            "description": "Retorna uma piada aleatória"
+        }
+    ],
+    "paths": {
+        "/health": {
+            "get": {
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "retorna a saude da API",
+                "operationId": "health",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "up"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product": {
+            "get": {
+                "summary": "Retorna uma lista de produtos",
+                "tags": [
+                    "Products"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de produtos retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Produto"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Cria um novo produto",
+                "tags": [
+                    "Products"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "descricao": {
+                                        "type": "string"
+                                    },
+                                    "preco": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Produto criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Produto"
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "Produto ja existe",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "Já existe esse produto",
+                                                "description": "Já existe esse produto"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Erro ao criar produto",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "Erro ao criar produto",
+                                                "description": "Erro ao criar produto"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/product/{id}": {
+            "get": {
+                "summary": "Retorna um produto pelo ID",
+                "tags": [
+                    "Products"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produto retornado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Produto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Produto não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "description": "Produto não encontrado"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Atualiza um produto existente",
+                "tags": [
+                    "Products"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "descricao": {
+                                        "type": "string"
+                                    },
+                                    "preco": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Produto atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Produto"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Produto não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "description": "Produto nao encontrado"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "summary": "Deleta um produto existente",
+                "tags": [
+                    "Products"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Produto excluído com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Produto excluído com sucesso"
+                                        },
+                                        "id": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Produto não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "description": "Produto não encontrado"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Ocorreu um erro, tente novamente mais tarde.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "description": "Ocorreu um erro, tente novamente mais tarde"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/user/register": {
+            "post": {
+                "summary": "Registrar um novo usuário",
+                "tags": [
+                    "Auth"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "confirmPassword": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuario cadastrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "_id": {
+                                            "type": "string"
+                                        },
+                                        "nome": {
+                                            "type": "string"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "402": {
+                        "description": "E-mail já cadastrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "description": "E-mail já cadastrado"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Erro ao criar Usuário",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "description": "Erro ao criar Usuário"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "summary": "Login de um usuário",
+                "tags": [
+                    "Auth"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Token criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "_id": {
+                                            "type": "string"
+                                        },
+                                        "nome": {
+                                            "type": "string"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "description": "Usuário não encontrado"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Senha inválida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "description": "Senha inválida"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/profile": {
+            "get": {
+                "summary": "Get current user by token",
+                "tags": [
+                    "Auth"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "acesso negado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "description": "acesso negado"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/joke": {
+            "get": {
+                "tags": [
+                    "Joker"
+                ],
+                "summary": "retorna uma piada aleatoria",
+                "operationId": "joke",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "joke": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Produto": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string"
+                    },
+                    "nome": {
+                        "type": "string"
+                    },
+                    "descricao": {
+                        "type": "string"
+                    },
+                    "preco": {
+                        "type": "string"
+                    },
+                    "criadoPor": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "__v": {
+                        "type": "integer"
+                    },
+                    "atualizadoPor": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "nome",
+                    "descricao",
+                    "preco"
+                ]
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "type": "string",
+                        "description": "O ID único do usuário."
+                    },
+                    "nome": {
+                        "type": "string",
+                        "description": "O nome do usuário."
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "O endereço de e-mail do usuário."
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "description": "O password do usuário."
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    },
+                    "__v": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "nome",
+                    "email",
+                    "password"
+                ]
+            },
+            "ApiResponse": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "errors": {
+                        "type": "[string]"
+                    }
+                },
+                "xml": {
+                    "name": "##default"
+                }
+            }
+        },
+        "securitySchemes": {
+            "Bearer": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}
